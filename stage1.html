@@ -1,0 +1,614 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+    <title>Stage SIO1 - Yasmin KHANJAOUI</title>
+    <meta name="description" content="Détails du stage SIO1 - Rétro-engineering d'un site B2B">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* ===== STAGE HERO ===== */
+        .stage-hero {
+            padding-top: 100px;
+            padding-bottom: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .stage-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+        }
+        .stage-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 350px;
+            height: 350px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        .stage-hero .container { position: relative; z-index: 2; }
+        .stage-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+        .stage-breadcrumb a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .stage-breadcrumb a:hover { color: white; }
+        .stage-breadcrumb i { font-size: 0.7rem; }
+        .stage-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .stage-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .stage-hero h1 span { color: rgba(255,255,255,0.7); font-weight: 400; font-size: 1.8rem; display: block; margin-top: 8px; }
+        .stage-hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .stage-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+        }
+        .stage-meta-item i { font-size: 1.1rem; opacity: 0.8; }
+        .stage-meta-item strong { display: block; font-size: 0.75rem; opacity: 0.65; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ===== SECTION STYLES ===== */
+        .info-block {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            transition: transform var(--transition-normal);
+        }
+        .info-block:hover { transform: translateY(-3px); box-shadow: var(--box-shadow-hover); }
+        .info-block-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--light-gray);
+        }
+        .info-block-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .info-block-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+        .info-block p { color: var(--gray-color); line-height: 1.75; margin-bottom: 12px; }
+        .info-block p:last-child { margin-bottom: 0; }
+
+        /* Grille 2 colonnes */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+        /* Liste stylisée */
+        .styled-list { list-style: none; padding: 0; margin: 0; }
+        .styled-list li {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--gray-color);
+            line-height: 1.5;
+        }
+        .styled-list li:last-child { border-bottom: none; }
+        .styled-list li i { color: var(--accent-color); margin-top: 3px; flex-shrink: 0; font-size: 0.9rem; }
+
+        /* Enjeux cards */
+        .enjeux-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-sm); }
+        .enjeu-card {
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            border-left: 4px solid var(--accent-color);
+            transition: all var(--transition-fast);
+        }
+        .enjeu-card:hover { transform: translateX(4px); border-left-color: var(--primary-color); }
+        .enjeu-card i { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 8px; display: block; }
+        .enjeu-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 6px; }
+        .enjeu-card p { font-size: 0.875rem; color: var(--gray-color); margin: 0; line-height: 1.5; }
+
+        /* Tech stack */
+        .tech-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--spacing-sm); }
+        .tech-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--light-gray);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+        .tech-chip:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            transform: translateY(-2px);
+        }
+        .tech-chip i { font-size: 1rem; }
+
+        /* Bilan banner */
+        .bilan-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-xl);
+        }
+        .bilan-banner i { font-size: 3rem; opacity: 0.9; flex-shrink: 0; }
+        .bilan-banner h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; }
+        .bilan-banner p { opacity: 0.85; margin: 0; line-height: 1.6; font-size: 0.95rem; }
+
+        /* Timeline missions */
+        .mission-timeline { margin-top: var(--spacing-sm); }
+        .mission-step {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+        .mission-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: -16px;
+            width: 2px;
+            background: var(--light-gray);
+        }
+        .mission-step-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        .mission-step-body { padding-top: 8px; }
+        .mission-step-body h4 { font-size: 1rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 4px; }
+        .mission-step-body p { font-size: 0.9rem; color: var(--gray-color); margin: 0; line-height: 1.6; }
+
+        /* Compétences acquises */
+        .competence-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .competence-item:last-child { border-bottom: none; }
+        .comp-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(251,113,133,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            font-size: 0.95rem;
+        }
+        .comp-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 3px; }
+        .comp-text p { font-size: 0.875rem; color: var(--gray-color); margin: 0; }
+
+        /* Nav adjustments */
+        .stage-nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            background: rgba(190,18,60,0.08);
+            transition: all var(--transition-fast);
+            margin-bottom: var(--spacing-xl);
+            font-size: 0.95rem;
+        }
+        .stage-nav-back:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-code"></i>
+            </a>
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Retour au portfolio</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="stage-hero">
+        <div class="container">
+            <div class="stage-breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Portfolio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html#experiences">Expériences</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Stage SIO1</span>
+            </div>
+
+            <div class="stage-hero-badge">
+                <i class="fas fa-briefcase"></i>
+                Stage de 1ère année BTS SIO
+            </div>
+
+            <h1>
+                Rétro-engineering d'un site B2B
+                <span>SHOEMAKERS Group — mai / juin 2025</span>
+            </h1>
+
+            <div class="stage-hero-meta">
+                <div class="stage-meta-item">
+                    <i class="fas fa-building"></i>
+                    <div>
+                        <strong>Entreprise</strong>
+                        SHOEMAKERS Group
+                    </div>
+                </div>
+                <div class="stage-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Localisation</strong>
+                        Chambretaud, 85500
+                    </div>
+                </div>
+                <div class="stage-meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div>
+                        <strong>Période</strong>
+                        Mai — Juin 2025 (7 semaines)
+                    </div>
+                </div>
+                <div class="stage-meta-item">
+                    <i class="fas fa-user-tie"></i>
+                    <div>
+                        <strong>Domaine</strong>
+                        Analyse & Gestion de projet
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenu principal -->
+    <main class="section">
+        <div class="container">
+
+            <!-- Contexte entreprise -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-building"></i></div>
+                    <h2>Contexte de l'entreprise</h2>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <p>
+                            <strong>SHOEMAKERS Group</strong> est une entreprise vendéenne spécialisée dans la fabrication et la commercialisation de chaussures pour enfants auprès de revendeurs. 
+                        </p>
+                        <p>
+                            Pour répondre à ses besoins commerciaux, l'entreprise exploite une <strong>application web B2B</strong> qui permet à ses revendeurs de consulter le catalogue et passer des commandes. 
+                            Cette plateforme est un outil central dans la relation client.
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            Au moment de mon stage, l'application reposait sur <strong>Bonfire CI</strong>, un framework PHP construit au-dessus de CodeIgniter, dont la maintenance était devenue problématique : documentation rare, dépendances obsolètes et évolution technologique bloquée.
+                        </p>
+                        <p>De plus, elle était hebergé sur un serveur web sous Debian 8, un serveur trop ancien pour garantir la sécurité et les performances de cette dernière.</p>
+                        <p>
+                            L'entreprise souhaitait donc un <strong>Rétro-engineering complet</strong> de l'application pour faciliter l'ajout de nouvelles fonctionnalités à l'avenir.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enjeux -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-chess"></i></div>
+                    <h2>Enjeux du stage</h2>
+                </div>
+                <div class="enjeux-grid">
+                    <div class="enjeu-card">
+                        <i class="fas fa-search-plus"></i>
+                        <h4>Comprendre l'existant</h4>
+                        <p>Analyser une application sans documentation, en explorant le code source et la structure de la base de données.</p>
+                    </div>
+                    <div class="enjeu-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Documenter pour préparer la suite</h4>
+                        <p>Produire une cartographie claire de l'application existante.</p>
+                    </div>
+                    <div class="enjeu-card">
+                        <i class="fas fa-server"></i>
+                        <h4>Moderniser l'environnement</h4>
+                        <p>Configurer un serveur web à jour et adapté pour accueillir l'application et ses éventuelles évolutions.</p>
+                    </div>
+                    <div class="enjeu-card">
+                        <i class="fas fa-tasks"></i>
+                        <h4>Autonomie & méthode</h4>
+                        <p>Mener une mission d'analyse en grande autonomie, avec une démarche méthodique et professionnelle.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missions -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-list-check"></i></div>
+                    <h2>Déroulement des missions</h2>
+                </div>
+                <div class="mission-timeline">
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">1</div>
+                        <div class="mission-step-body">
+                            <h4>Prise en main et exploration du projet existant</h4>
+                            <p>
+                                La première étape a consisté à installer et faire tourner l'application Bonfire CI localement, 
+                                puis à explorer l'arborescence du code source : routes, contrôleurs, modèles, vues. 
+                                J'ai cartographié les fonctionnalités existantes (catalogue, gestion des commandes, comptes revendeurs, tarification) 
+                                pour obtenir une vision globale du système avant d'aller plus loin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">2</div>
+                        <div class="mission-step-body">
+                            <h4>Analyse de la base de données</h4>
+                            <p>
+                                J'ai étudié le schéma de la base de données MySQL afin de comprendre les relations entre les entités 
+                                (produits, clients, commandes, familles tarifaires…). 
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">3</div>
+                        <div class="mission-step-body">
+                            <h4>Rédaction du Cahier des Charges</h4>
+                            <p>
+                                À partir de l'analyse effectuée et des demandes des commerciaux, j'ai rédigé un Cahier des Charges des évolutions futures de l'application. 
+                                Ce document recense les fonctionnalités actuelles à conserver, les dysfonctionnements identifiés, 
+                                les évolutions souhaitées par l'entreprise, ainsi que les contraintes techniques à respecter 
+                                lors de la migration envisagée.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">4</div>
+                        <div class="mission-step-body">
+                            <h4>Configuration d'un serveur web moderne</h4>
+                            <p>
+                                En parallèle, j'ai configuré un serveur web sous Linux (Apache, PHP 8+, MySQL) en vue d'accueillir 
+                                l'application. J'ai veillé à respecter les bonnes pratiques de configuration 
+                                (virtual hosts, permissions, variables d'environnement) afin de disposer d'un environnement stable et sécurisé pour la suite du projet.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Stack technique -->
+            <div class="two-col">
+
+                <div class="info-block" style="margin-bottom: 0;">
+                    <div class="info-block-header">
+                        <div class="info-block-icon"><i class="fas fa-tools"></i></div>
+                        <h2>Technologies utilisées</h2>
+                    </div>
+                    <div class="tech-grid">
+                        <span class="tech-chip"><i class="fab fa-php" style="color:#777BB4"></i> Bonfire CI</span>
+                        <span class="tech-chip"><i class="fab fa-linux" style="color:#FCC624"></i> Linux (Debian)</span>
+                        <span class="tech-chip"><i class="fas fa-terminal" style="color:#4CAF50"></i> Bash / CLI</span>
+                        <span class="tech-chip"><i class="fas fa-table" style="color:#FF9800"></i> phpMyAdmin</span>
+                    </div>
+                </div>
+
+                <div class="info-block" style="margin-bottom: 0;">
+                    <div class="info-block-header">
+                        <div class="info-block-icon"><i class="fas fa-file-alt"></i></div>
+                        <h2>Livrables produits</h2>
+                    </div>
+                    <ul class="styled-list">
+                        <li><i class="fas fa-check-circle"></i> Cartographie des fonctionnalités de l'application existante</li>
+                        <li><i class="fas fa-check-circle"></i> Analyse et schéma de la base de données héritée</li>
+                        <li><i class="fas fa-check-circle"></i> Cahier des Charges des évolutions futures</li>
+                        <li><i class="fas fa-check-circle"></i> Serveur web Linux configuré et opérationnel</li>
+                        <li><i class="fas fa-check-circle"></i> Documentation technique de l'environnement serveur</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Compétences acquises -->
+            <div class="info-block" style="margin-top: var(--spacing-lg);">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h2>Compétences développées</h2>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-search"></i></div>
+                            <div class="comp-text">
+                                <h4>Analyse de l'existant (rétro-engineering)</h4>
+                                <p>Lire, comprendre et documenter une application sans documentation initiale, en adoptant une approche méthodique.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-file-contract"></i></div>
+                            <div class="comp-text">
+                                <h4>Rédaction d'un Cahier des Charges</h4>
+                                <p>Formaliser des besoins métier et des contraintes techniques dans un document professionnel clair et structuré.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-database"></i></div>
+                            <div class="comp-text">
+                                <h4>Analyse de base de données</h4>
+                                <p>Déchiffrer un schéma relationnel complexe, identifier les dépendances et les points de fragilité.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fab fa-linux"></i></div>
+                            <div class="comp-text">
+                                <h4>Administration Linux / serveur</h4>
+                                <p>Configurer Apache, PHP et les droits d'accès sur un environnement Debian en vue d'une mise en production.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-project-diagram"></i></div>
+                            <div class="comp-text">
+                                <h4>Gestion de projet & autonomie</h4>
+                                <p>Organiser mon travail de façon autonome, respecter les délais et communiquer sur l'avancement à l'équipe.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-comment-dots"></i></div>
+                            <div class="comp-text">
+                                <h4>Communication en milieu professionnel</h4>
+                                <p>Interagir avec les parties prenantes, comprendre leurs besoins et restituer mon travail à l'oral comme à l'écrit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bilan -->
+            <div class="bilan-banner">
+                <i class="fas fa-star"></i>
+                <div>
+                    <h3>Bilan du stage</h3>
+                    <p>
+                        Ce premier stage m'a permis de découvrir le travail d'analyse en conditions réelles et de comprendre 
+                        les enjeux d'une analyse applicative dans un contexte professionnel. 
+                        Travailler sur une application  sans documentation m'a appris à faire preuve de rigueur, 
+                        de curiosité et d'autonomie. Les livrables produits ont directement servi de base 
+                        pour le stage de deuxième année, où j'ai réalisé la migration elle-même vers Laravel.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-code"></i>
+                    <span>Yasmin KHANJAOUI</span>
+                </div>
+                <p class="footer-text">Étudiante en BTS SIO option SLAM — Passionnée par le développement et les nouvelles technologies</p>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/in/yasminkhanjaoui26" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/yasminkji" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:yasminkhanjaoui@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2026 Yasmin KHANJAOUI — Portfolio BTS SIO SLAM. Tous droits réservés.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

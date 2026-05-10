@@ -129,6 +129,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Rédaction d'une documentation technique",
                 "Capacité à présenter à l'oral"
             ],
+        },
+
+        6: {
+            title: "Veille Informationnelle",
+            description: "Projet de veille informationnelle sur Laravel",
+            mission: ["veille avec newletter et blblbal"],
+            features: ["evdfgdzvfhabvehrfbi"],
+            challenges: ["dfgdfgdfgdfgdfgdfgdfg"],
         }
     };
     

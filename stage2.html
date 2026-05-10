@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+    <title>Stage SIO2 - Yasmin KHANJAOUI</title>
+    <meta name="description" content="Détails du stage SIO2 - Migration vers Laravel">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* ===== STAGE HERO ===== */
+        .stage-hero {
+            padding-top: 100px;
+            padding-bottom: 60px;
+            background: linear-gradient(135deg, #0f172a 0%, #be123c 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .stage-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -8%;
+            width: 520px;
+            height: 520px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        .stage-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -25%;
+            left: -5%;
+            width: 360px;
+            height: 360px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+        .stage-hero .container { position: relative; z-index: 2; }
+        .stage-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+        .stage-breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s; }
+        .stage-breadcrumb a:hover { color: white; }
+        .stage-breadcrumb i { font-size: 0.7rem; }
+        .stage-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .stage-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .stage-hero h1 span { color: rgba(255,255,255,0.7); font-weight: 400; font-size: 1.8rem; display: block; margin-top: 8px; }
+        .stage-hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 28px;
+            padding-top: 28px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .stage-meta-item { display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .stage-meta-item i { font-size: 1.1rem; opacity: 0.8; }
+        .stage-meta-item strong { display: block; font-size: 0.75rem; opacity: 0.65; text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ===== SECTIONS ===== */
+        .info-block {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--box-shadow);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+            transition: transform var(--transition-normal);
+        }
+        .info-block:hover { transform: translateY(-3px); box-shadow: var(--box-shadow-hover); }
+        .info-block-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--light-gray);
+        }
+        .info-block-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .info-block-header h2 { font-size: 1.25rem; font-weight: 600; color: var(--secondary-color); margin: 0; }
+        .info-block p { color: var(--gray-color); line-height: 1.75; margin-bottom: 12px; }
+        .info-block p:last-child { margin-bottom: 0; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+        .styled-list { list-style: none; padding: 0; margin: 0; }
+        .styled-list li {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--light-gray);
+            color: var(--gray-color);
+            line-height: 1.5;
+        }
+        .styled-list li:last-child { border-bottom: none; }
+        .styled-list li i { color: var(--accent-color); margin-top: 3px; flex-shrink: 0; font-size: 0.9rem; }
+
+        /* Enjeux */
+        .enjeux-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--spacing-md); margin-top: var(--spacing-sm); }
+        .enjeu-card {
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            border-left: 4px solid var(--accent-color);
+            transition: all var(--transition-fast);
+        }
+        .enjeu-card:hover { transform: translateX(4px); border-left-color: var(--primary-color); }
+        .enjeu-card i { font-size: 1.4rem; color: var(--primary-color); margin-bottom: 8px; display: block; }
+        .enjeu-card h4 { font-size: 0.95rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 6px; }
+        .enjeu-card p { font-size: 0.875rem; color: var(--gray-color); margin: 0; line-height: 1.5; }
+
+        /* Tech */
+        .tech-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-top: var(--spacing-sm); }
+        .tech-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--light-gray);
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+            border: 1px solid transparent;
+            transition: all var(--transition-fast);
+        }
+        .tech-chip:hover { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; transform: translateY(-2px); }
+        .tech-chip i { font-size: 1rem; }
+
+        /* Avant / Après */
+        .migration-compare {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--spacing-md);
+            align-items: center;
+            margin-top: var(--spacing-sm);
+        }
+        @media (max-width: 640px) {
+            .migration-compare { grid-template-columns: 1fr; }
+            .migration-arrow { transform: rotate(90deg); }
+        }
+        .migration-box {
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+        }
+        .migration-box.before {
+            background: rgba(100,116,139,0.1);
+            border: 1px solid rgba(100,116,139,0.2);
+        }
+        .migration-box.after {
+            background: rgba(190,18,60,0.07);
+            border: 1px solid rgba(190,18,60,0.2);
+        }
+        .migration-box h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .migration-box.before h4 { color: var(--gray-color); }
+        .migration-box.after h4 { color: var(--primary-color); }
+        .migration-box ul { list-style: none; padding: 0; margin: 0; }
+        .migration-box ul li { padding: 5px 0; font-size: 0.9rem; color: var(--gray-color); display: flex; gap: 8px; align-items: flex-start; }
+        .migration-box ul li i { margin-top: 3px; font-size: 0.8rem; }
+        .migration-arrow { text-align: center; font-size: 1.8rem; color: var(--primary-color); }
+
+        /* Timeline missions */
+        .mission-timeline { margin-top: var(--spacing-sm); }
+        .mission-step {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            position: relative;
+        }
+        .mission-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 40px;
+            bottom: -16px;
+            width: 2px;
+            background: var(--light-gray);
+        }
+        .mission-step-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0f172a, var(--primary-color));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        .mission-step-body { padding-top: 8px; }
+        .mission-step-body h4 { font-size: 1rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 4px; }
+        .mission-step-body p { font-size: 0.9rem; color: var(--gray-color); margin: 0; line-height: 1.6; }
+        .mission-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .mission-tag {
+            font-size: 0.78rem;
+            padding: 3px 10px;
+            background: rgba(190,18,60,0.09);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-weight: 500;
+            font-family: var(--font-secondary);
+        }
+
+        /* Compétences */
+        .competence-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .competence-item:last-child { border-bottom: none; }
+        .comp-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(251,113,133,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            font-size: 0.95rem;
+        }
+        .comp-text h4 { font-size: 0.95rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 3px; }
+        .comp-text p { font-size: 0.875rem; color: var(--gray-color); margin: 0; }
+
+        /* Lien stage 1 */
+        .stage-link-card {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            text-decoration: none;
+            color: inherit;
+            transition: all var(--transition-fast);
+            border: 1px solid transparent;
+        }
+        .stage-link-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+        .stage-link-card i.big { font-size: 2rem; color: var(--primary-color); flex-shrink: 0; }
+        .stage-link-card h4 { font-size: 1rem; font-weight: 600; color: var(--secondary-color); margin-bottom: 3px; }
+        .stage-link-card p { font-size: 0.875rem; color: var(--gray-color); margin: 0; }
+        .stage-link-card .arrow { margin-left: auto; color: var(--primary-color); font-size: 1.1rem; }
+
+        /* Bilan banner */
+        .bilan-banner {
+            background: linear-gradient(135deg, #0f172a, var(--primary-color));
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-xl);
+        }
+        .bilan-banner i.icon { font-size: 3rem; opacity: 0.9; flex-shrink: 0; }
+        .bilan-banner h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; }
+        .bilan-banner p { opacity: 0.85; margin: 0; line-height: 1.6; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-code"></i>
+            </a>
+            <button class="menu-toggle" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link"><i class="fas fa-arrow-left"></i> Retour au portfolio</a></li>
+            </ul>
+            <div class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="stage-hero">
+        <div class="container">
+            <div class="stage-breadcrumb">
+                <a href="index.html"><i class="fas fa-home"></i> Portfolio</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="index.html#experiences">Expériences</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Stage SIO2</span>
+            </div>
+
+            <div class="stage-hero-badge">
+                <i class="fas fa-rocket"></i>
+                Stage de 2ème année BTS SIO
+            </div>
+
+            <h1>
+                Migration d'un site B2B vers Laravel
+                <span>SHOEMAKERS Group — janvier / février 2026</span>
+            </h1>
+
+            <div class="stage-hero-meta">
+                <div class="stage-meta-item">
+                    <i class="fas fa-building"></i>
+                    <div><strong>Entreprise</strong>SHOEMAKERS Group</div>
+                </div>
+                <div class="stage-meta-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div><strong>Localisation</strong>Chambretaud, 85500</div>
+                </div>
+                <div class="stage-meta-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div><strong>Période</strong>Janvier — Février 2026 (7 semaines)</div>
+                </div>
+                <div class="stage-meta-item">
+                    <i class="fas fa-code"></i>
+                    <div><strong>Domaine</strong>Développement web full-stack</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contenu principal -->
+    <main class="section">
+        <div class="container">
+
+            <!-- Lien vers stage 1 -->
+            <a href="stage1.html" class="stage-link-card" style="margin-bottom: var(--spacing-lg); display: flex;">
+                <i class="fas fa-history big"></i>
+                <div>
+                    <h4>Ce stage fait suite au Stage SIO1</h4>
+                    <p>Le rétro-engineering et le cahier des charges réalisés lors de la première année ont préparé et rendu possible cette migration.</p>
+                </div>
+                <i class="fas fa-arrow-right arrow"></i>
+            </a>
+
+            <!-- Contexte -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-building"></i></div>
+                    <h2>Contexte du projet</h2>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <p>
+                            En continuité du stage SIO1, j'ai été de nouveau accueillie chez <strong>SHOEMAKERS Group</strong>
+                            pour réaliser la phase opérationnelle du projet : la <strong>migration de l'application B2B</strong>
+                            depuis l'ancien framework <em>Bonfire CI</em> vers <strong>Laravel</strong>.
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            Grâce au travail d'analyse mené l'année précédente, je disposais d'une <strong>connaissance approfondie
+                            du code existant</strong>, ce qui m'a permis d'aborder la migration plus facilement.
+                        </p>
+                        <p>
+                            L'objectif final était d'avoir une application plus <strong>moderne</strong> afin de garantir la continuité du service et l'intégrité des données existantes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avant / Après -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h2>Avant / Après la migration</h2>
+                </div>
+                <div class="migration-compare">
+                    <div class="migration-box before">
+                        <h4><i class="fas fa-times-circle" style="color:#94a3b8; margin-right:6px;"></i> Bonfire CI (avant)</h4>
+                        <ul>
+                            <li><i class="fas fa-minus" style="color:#94a3b8;"></i> Framework non maintenu</li>
+                            <li><i class="fas fa-minus" style="color:#94a3b8;"></i> PHP 7, dépendances obsolètes</li>
+                            <li><i class="fas fa-minus" style="color:#94a3b8;"></i> Documentation rare</li>
+                            <li><i class="fas fa-minus" style="color:#94a3b8;"></i> Évolutions bloquées</li>
+                            <li><i class="fas fa-minus" style="color:#94a3b8;"></i> Sécurité à risque</li>
+                        </ul>
+                    </div>
+                    <div class="migration-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="migration-box after">
+                        <h4><i class="fas fa-check-circle" style="color:#be123c; margin-right:6px;"></i> Laravel (après)</h4>
+                        <ul>
+                            <li><i class="fas fa-plus" style="color:#be123c;"></i> Framework actif et documenté</li>
+                            <li><i class="fas fa-plus" style="color:#be123c;"></i> PHP 8+, écosystème moderne</li>
+                            <li><i class="fas fa-plus" style="color:#be123c;"></i> ORM Eloquent, Blade, Artisan</li>
+                            <li><i class="fas fa-plus" style="color:#be123c;"></i> Évolutions facilitées</li>
+                            <li><i class="fas fa-plus" style="color:#be123c;"></i> Sécurité renforcée</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enjeux -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-chess"></i></div>
+                    <h2>Enjeux techniques et organisationnels</h2>
+                </div>
+                <div class="enjeux-grid">
+                    <div class="enjeu-card">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4>Fidélité fonctionnelle</h4>
+                        <p>Reproduire exactement les fonctionnalités de l'ancienne application sans perte ni régression pour les utilisateurs.</p>
+                    </div>
+                    <div class="enjeu-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Intégrité des données</h4>
+                        <p>Migrer et adapter les requêtes SQL existantes vers Eloquent sans altérer la cohérence des données de production.</p>
+                    </div>
+                    <div class="enjeu-card">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h4>Mise en production</h4>
+                        <p>Déployer l'application sur le serveur configuré lors du premier stage, avec zéro interruption de service.</p>
+                    </div>
+                    <div class="enjeu-card">
+                        <i class="fas fa-clock"></i>
+                        <h4>Contraintes de délai</h4>
+                        <p>Livrer une application fonctionnelle et stable en 7 semaines, en priorisant les fonctionnalités critiques.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Missions -->
+            <div class="info-block">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-list-check"></i></div>
+                    <h2>Déroulement des missions</h2>
+                </div>
+                <div class="mission-timeline">
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">1</div>
+                        <div class="mission-step-body">
+                            <h4>Mise en place de l'environnement Laravel</h4>
+                            <p>
+                                Initialisation du projet Laravel, configuration du fichier <code>.env</code> (connexion BDD, variables d'application),
+                                installation des dépendances via Composer et mise en place de la structure MVC.
+                                Création des premières routes, contrôleurs et vues Blade pour valider l'architecture.
+                            </p>
+                            <div class="mission-tags">
+                                <span class="mission-tag">Laravel</span>
+                                <span class="mission-tag">Composer</span>
+                                <span class="mission-tag">Artisan</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">2</div>
+                        <div class="mission-step-body">
+                            <h4>Migration de la base de données et adaptation Eloquent</h4>
+                            <p>
+                                Réécriture des requêtes SQL brutes de l'ancienne application en utilisant l'ORM Eloquent de Laravel.
+                                Création des modèles, définition des relations (hasMany, belongsTo…) et adaptation des migrations
+                                pour correspondre au schéma existant tout en profitant des fonctionnalités modernes de Laravel.
+                            </p>
+                            <div class="mission-tags">
+                                <span class="mission-tag">Eloquent ORM</span>
+                                <span class="mission-tag">Migrations</span>
+                                <span class="mission-tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mission-step">
+                        <div class="mission-step-num">3</div>
+                        <div class="mission-step-body">
+                            <h4>Adaptation et refonte des fonctionnalités existantes</h4>
+                            <p>
+                                Migration des modules métier de l'application : catalogue produits, gestion des commandes, comptes revendeurs,
+                                grilles tarifaires et tableaux de bord. Réécriture des contrôleurs en respectant les conventions Laravel
+                                (Resource Controllers, Form Requests, Policies) et adaptation des vues en Blade.
+                            </p>
+                            <div class="mission-tags">
+                                <span class="mission-tag">Controllers</span>
+                                <span class="mission-tag">Blade</span>
+                                <span class="mission-tag">Middleware</span>
+                                <span class="mission-tag">Auth</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stack + Livrables -->
+            <div class="two-col">
+
+                <div class="info-block" style="margin-bottom: 0;">
+                    <div class="info-block-header">
+                        <div class="info-block-icon"><i class="fas fa-tools"></i></div>
+                        <h2>Technologies utilisées</h2>
+                    </div>
+                    <div class="tech-grid">
+                        <span class="tech-chip"><i class="fab fa-laravel" style="color:#FF2D20"></i> Laravel 11</span>
+                        <span class="tech-chip"><i class="fab fa-php" style="color:#777BB4"></i> PHP 8+</span>
+                        <span class="tech-chip"><i class="fas fa-database" style="color:#4479A1"></i> MySQL</span>
+                        <span class="tech-chip"><i class="fas fa-layer-group" style="color:#be123c"></i> Eloquent ORM</span>
+                        <span class="tech-chip"><i class="fas fa-code" style="color:#E34F26"></i> Blade</span>
+                        <span class="tech-chip"><i class="fab fa-git-alt" style="color:#F05032"></i> Git / GitHub</span>
+                        <span class="tech-chip"><i class="fab fa-linux" style="color:#FCC624"></i> Linux</span>
+                        <span class="tech-chip"><i class="fas fa-server" style="color:#607D8B"></i> Apache</span>
+                        <span class="tech-chip"><i class="fas fa-terminal" style="color:#4CAF50"></i> Artisan CLI</span>
+                        <span class="tech-chip"><i class="fas fa-box" style="color:#885630"></i> Composer</span>
+                    </div>
+                </div>
+
+                <div class="info-block" style="margin-bottom: 0;">
+                    <div class="info-block-header">
+                        <div class="info-block-icon"><i class="fas fa-file-alt"></i></div>
+                        <h2>Livrables produits</h2>
+                    </div>
+                    <ul class="styled-list">
+                        <li><i class="fas fa-check-circle"></i> Application B2B migrée et fonctionnelle sous Laravel</li>
+                        <li><i class="fas fa-check-circle"></i> Modèles Eloquent et migrations de base de données</li>
+                        <li><i class="fas fa-check-circle"></i> Ensemble des vues Blade adaptées</li>
+                        <li><i class="fas fa-check-circle"></i> Application déployée en production sur le serveur</li>
+                        <li><i class="fas fa-check-circle"></i> Documentation technique de déploiement</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Compétences acquises -->
+            <div class="info-block" style="margin-top: var(--spacing-lg);">
+                <div class="info-block-header">
+                    <div class="info-block-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h2>Compétences développées</h2>
+                </div>
+                <div class="two-col">
+                    <div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fab fa-laravel"></i></div>
+                            <div class="comp-text">
+                                <h4>Maîtrise de Laravel</h4>
+                                <p>Conception et développement d'une application complète : routing, contrôleurs, Eloquent, Blade, middleware, authentification.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-sync-alt"></i></div>
+                            <div class="comp-text">
+                                <h4>Conduite d'une migration applicative</h4>
+                                <p>Gérer la transition entre deux frameworks en préservant la logique métier, les données et la continuité de service.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-database"></i></div>
+                            <div class="comp-text">
+                                <h4>Requêtes SQL avancées & Eloquent</h4>
+                                <p>Réécriture et optimisation de requêtes complexes via l'ORM, gestion des relations et des performances.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-rocket"></i></div>
+                            <div class="comp-text">
+                                <h4>Déploiement en production</h4>
+                                <p>Configurer un environnement serveur Linux/Apache, déployer une application Laravel et assurer sa stabilité.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fab fa-git-alt"></i></div>
+                            <div class="comp-text">
+                                <h4>Versioning Git</h4>
+                                <p>Utiliser Git pour suivre les évolutions du projet, gérer les branches et livrer du code propre et traçable.</p>
+                            </div>
+                        </div>
+                        <div class="competence-item">
+                            <div class="comp-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="comp-text">
+                                <h4>Sécurité applicative</h4>
+                                <p>Appliquer les bonnes pratiques Laravel (CSRF, validation, authentification) pour sécuriser l'application en production.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bilan -->
+            <div class="bilan-banner">
+                <i class="fas fa-trophy icon"></i>
+                <div>
+                    <h3>Bilan du stage</h3>
+                    <p>
+                        Ce stage de deuxième année a représenté un véritable projet professionnel complet.
+                        En combinant les connaissances acquises lors du premier stage et mes compétences développées en BTS,
+                        j'ai pu mener à bien la migration d'une application métier.
+                        Cette expérience m'a donné une vision concrète du cycle de vie complet d'un projet web et de renforcé ma capacité  à travailler en conditions réelles.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-code"></i>
+                    <span>Yasmin KHANJAOUI</span>
+                </div>
+                <p class="footer-text">Étudiante en BTS SIO option SLAM — Passionnée par le développement et les nouvelles technologies</p>
+                <div class="footer-social">
+                    <a href="https://linkedin.com/in/yasminkhanjaoui26" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/yasminkji" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:yasminkhanjaoui@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2026 Yasmin KHANJAOUI — Portfolio BTS SIO SLAM. Tous droits réservés.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
