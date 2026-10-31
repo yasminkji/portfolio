@@ -141,12 +141,14 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // ===== NAVIGATION MOBILE =====
+    if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
         menuToggle.innerHTML = navMenu.classList.contains('active') 
             ? '<i class="fas fa-times"></i>' 
             : '<i class="fas fa-bars"></i>';
     });
+}
     
     // Fermer le menu mobile en cliquant sur un lien
     navLinks.forEach(link => {

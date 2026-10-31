@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veille technologique - Portfolio Yasmin KHANJAOUI</title>
+    <meta name="description" content="Veille technologique sur Laravel et les API REST">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+      .veille-page-nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+      .veille-page-nav a{color:inherit;text-decoration:none;font-weight:500}
+      .veille-page-nav .back-link{display:inline-flex;align-items:center;gap:10px}
+      .veille-page-main{padding-top:110px;min-height:100vh}
+      .veille-page-main .container{max-width:1200px}
+      .veille-page-title{margin-bottom:35px}
+      .veille-page-footer{text-align:center;padding:28px 16px;opacity:.8}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container veille-page-nav">
+            <a href="index.html" class="nav-logo" aria-label="Retour à l'accueil"><i class="fas fa-code"></i></a>
+            <a href="index.html#projets" class="back-link"><i class="fas fa-arrow-left"></i> Retour aux projets</a>
+            <div class="theme-toggle"><i class="fas fa-moon"></i></div>
+        </div>
+    </nav>
+    <main id="veille" class="section veille-page-main">
+        <div class="container">
+            <h2 class="section-title veille-page-title">
+                <i class="fas fa-satellite-dish section-icon"></i>
+                <span>Veille Technologique</span>
+            </h2>
+
+        <!-- Intro sujet -->
+        <div class="veille-intro">
+            <div class="veille-intro-icon">
+                <i class="fab fa-laravel"></i>
+            </div>
+            <div class="veille-intro-text">
+                <h3>Laravel & Développement d'API REST</h3>
+                <p>Dans le cadre de mon BTS SIO option SLAM, j'ai effectué une veille active sur Laravel,
+                   framework PHP moderne, et sur les bonnes pratiques de conception d'API REST —
+                   deux technologies au cœur de mon stage et de mes projets.</p>
+            </div>
+        </div>
+
+        <div class="veille-grid">
+
+            <!-- Carte 1 : C'est quoi Laravel -->
+            <div class="veille-card">
+                <div class="veille-card-header veille-color-laravel">
+                    <i class="fab fa-laravel"></i>
+                    <span>Laravel</span>
+                </div>
+                <div class="veille-card-body">
+                    <h3>Qu'est-ce que Laravel ?</h3>
+                    <p>Laravel est un framework PHP open-source apparu en 2011, conçu pour
+                       simplifier le développement web grâce à une meilleure syntaxe  et
+                       des outils intégrés (routing, ORM Eloquent, Blade, Artisan...).</p>
+                </div>
+            </div>
+
+            <!-- Carte 2 : API REST -->
+            <div class="veille-card">
+                <div class="veille-card-header veille-color-api">
+                    <i class="fas fa-plug"></i>
+                    <span>API REST</span>
+                </div>
+                <div class="veille-card-body">
+                    <h3>Qu'est-ce qu'une API REST ?</h3>
+                    <p>Une API REST (Representational State Transfer) est une interface qui permet
+                       à deux applications de communiquer entre elles via HTTP. Elle repose sur des ressources
+                       accessibles par des URLs et des méthodes standardisées (GET, POST, PUT, DELETE).</p>
+                </div>
+            </div>
+
+            <!-- Carte 3 : Laravel + API REST -->
+            <div class="veille-card">
+                <div class="veille-card-header veille-color-combo">
+                    <i class="fas fa-rocket"></i>
+                    <span>Laravel + API REST</span>
+                </div>
+                <div class="veille-card-body">
+                    <h3>Laravel pour construire des API : </h3>
+                    <p>Laravel propose des outils puissants pour créer des API REST :
+                       ressources Eloquent, authentification via Sanctum ou Passport,
+                       gestion des routes API, et retour JSON automatisé.</p>
+                </div>
+            </div>
+
+            <!-- Carte 4 : Pourquoi cette veille -->
+            <div class="veille-card">
+                <div class="veille-card-header veille-color-why">
+                    <i class="fas fa-lightbulb"></i>
+                    <span>Pourquoi ce sujet ?</span>
+                </div>
+                <div class="veille-card-body">
+                    <h3>Lien avec mon parcours : </h3>
+                    <p>Durant mon stage chez SHOEMAKERS Group, j'ai travaillé sur la migration
+                       d'un site B2B vers Laravel. Cette expérience m'a poussée à approfondir
+                       le framework et à comprendre comment structurer des API REST robustes.</p>
+                </div>
+            </div>
+
+            <!-- Carte 5 : Sources -->
+            <div class="veille-card veille-card--sources">
+                <div class="veille-card-header veille-color-sources">
+                    <i class="fas fa-book-open"></i>
+                    <span>Mes sources de veille</span>
+                </div>
+                <div class="veille-card-body">
+                    <h3>Comment je me tiens informée : </h3>
+                    <div class="veille-sources-list">
+                        <a href="https://laravel.com/docs" target="_blank" class="veille-source">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Documentation officielle Laravel</span>
+                            <i class="fas fa-arrow-up-right-from-square veille-source-arrow"></i>
+                        </a>
+                        <a href="https://laravel-news.com" target="_blank" class="veille-source">
+                            <i class="fas fa-newspaper"></i>
+                            <span>Laravel News</span>
+                            <i class="fas fa-arrow-up-right-from-square veille-source-arrow"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/laravel-news/posts/?feedView=all" target="_blank" class="veille-source">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn Laravel News</span>
+                            <i class="fas fa-arrow-up-right-from-square veille-source-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA lien veille -->
+            <div class="veille-card veille-card--cta">
+                <div class="veille-cta-content">
+                    <div class="veille-cta-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <div class="veille-cta-text">
+                        <h3>Rapport de veille </h3>
+                        <p>Voici mon document de veille technologique détaillé sur Laravel et les API REST</p>
+                    </div>
+                    <a href="assets/Veille_Laravel.pdf" target="_blank" class="veille-cta-btn">
+                        <i class="fas fa-arrow-up-right-from-square"></i>
+                        Consulter
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </main>
+    <footer class="veille-page-footer">
+        <a href="index.html#projets"> <i class="fas fa-arrow-left"></i> Retour aux projets BTS</a>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
